@@ -1,0 +1,259 @@
+:root {
+    --primary: #2c3e50;
+    --secondary: #3498db;
+    --error: #e74c3c;
+    --success: #2ecc71;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f5f6fa;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    max-height: 1000px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: max-height 0.5s ease;
+}
+
+.drop-zone {
+    border: 2px dashed var(--primary);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 20px;
+}
+
+.drop-zone:hover {
+    border-color: var(--secondary);
+    background: #f8f9fa;
+}
+
+.drop-zone.dragover {
+    border-color: var(--success);
+    background: rgba(46, 204, 113, 0.1);
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn.encrypt { background: var(--success); }
+.btn.decrypt { background: var(--secondary); }
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.status {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-10px);
+    transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+    padding: 0 15px; /* Убери вертикальные отступы при скрытии */
+    margin: 0;
+}
+
+.status.active {
+    max-height: 200px; /* Хватает для пары строк текста */
+    opacity: 1;
+    transform: translateY(0);
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.status.success {
+    background: rgba(46, 204, 113, 0.1);
+    color: var(--success);
+}
+
+.status.error {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--error);
+}
+
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #7f8c8d;
+    font-size: 0.9em;
+}
+
+.material-icons {
+    vertical-align: middle;
+}
+
+/* Стили для статуса ключа */
+.key-status {
+    position: relative;
+}
+
+.active-key {
+    display: none;
+    background: #2ecc71;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    animation: fadeIn 0.3s;
+}
+
+.active-key:hover {
+    background: #27ae60;
+}
+
+.key-status.has-key #keyLabel {
+    display: none;
+}
+
+.key-status.has-key .active-key {
+    display: flex;
+}
+
+/* Стили для списка файлов */
+.file-list {
+    margin-top: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.file-list-header {
+    color: #7f8c8d;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    background: white;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.file-item:hover {
+    transform: translateX(5px);
+}
+
+.file-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    padding: 5px;
+    margin-left: auto;
+}
+
+.delete-btn:hover {
+    color: #c0392b;
+}
+
+.small {
+    padding: 8px 12px;
+    font-size: 0.8em;
+}
+
+.file-count {
+    background: var(--secondary);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.8em;
+}
+
+.file-item .material-icons {
+    margin-right: 10px;
+    color: #3498db;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.file-size {
+    margin-left: auto;
+    color: #7f8c8d;
+    font-size: 0.9em;
+}
+
+.key-status {
+    transition: all 0.3s ease;
+}
+
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.filename{
+    max-width: 50%;
+    overflow: hidden;
+}

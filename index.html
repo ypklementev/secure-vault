@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Vault</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Secure Vault</h1>
+        
+        <div class="card">
+            <div class="drop-zone" id="dropZone">
+                <span class="material-icons">cloud_upload</span>
+                <p>Перетащите файл сюда или кликните для выбора</p>
+                <input type="file" id="fileInput" hidden>
+            </div>
+
+            <div class="actions">
+                <button class="btn" onclick="generateKey()">
+                    <span class="material-icons">vpn_key</span>
+                    Создать ключ
+                </button>
+                
+                <div id="keyStatus" class="key-status">
+                    <!-- Динамически будет меняться между кнопкой и статусом -->
+                    <label class="btn" id="keyLabel">
+                        <span class="material-icons">usb</span>
+                        Выбрать ключ
+                        <input type="file" id="keyInput" accept=".key" hidden>
+                    </label>
+                    <div id="activeKey" class="active-key" onclick="document.getElementById('keyInput').click()">
+                        <span class="material-icons">key</span>
+                        Ключ активен (нажмите для смены)
+                    </div>
+                </div>
+            </div>
+
+            <div class="file-list" id="fileList">
+                <div class="file-list-header">
+                    Загруженные файлы:
+                    <span class="file-count" id="fileCount">0</span>
+                </div>
+                <div class="file-items" id="fileItems"></div>
+                <div class="file-actions">
+                    <button class="btn small" onclick="clearAllFiles()">
+                        <span class="material-icons">delete_forever</span>
+                        Очистить всё
+                    </button>
+                </div>
+            </div>
+
+            <div class="status" id="status"></div>
+
+            <div class="controls">
+                <button class="btn encrypt" onclick="encrypt()" disabled>
+                    <span class="material-icons">lock</span>
+                    Шифровать
+                </button>
+                <button class="btn decrypt" onclick="decrypt()" disabled>
+                    <span class="material-icons">lock_open</span>
+                    Дешифровать
+                </button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🔑 Ключ активен только во время сессии</p>
+            <p>🛡️ Все операции выполняются локально</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
